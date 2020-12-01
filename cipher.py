@@ -10,10 +10,12 @@ def main():
     print("=== Welcome to python cipher v0.1.0 ===")
     userInput = ""
     while(userInput != "q" or userInput != "quit"):
-        userInput = input("Choose a option\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n 4 Help and Instructions\n\n")
+        userInput = input("Choose a option\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n4 Help and Instructions\n\n")
+        if userInput == "q":
+            break
 
 def generateKey():
-    #associate letters of alphabet with a random character and return the mapped values
+    #associate letters of alphabet with a random character and save mapped characters to text file
     global keyMapperFile
     charsToTranslate = ["a","b","c","d", "e", "f" , "g", "h","i","j","k","l","m","n","o","p","q","r","s","t","u",
     "v","w","x","y","z"," "]
@@ -65,11 +67,9 @@ def setKeyMapper(filename):
     global keyMapperFile
     keyMapperFile = filename
 
-main()
-
 
 '''
-with open('testkeyMap.txt') as f:
+with open('exampleKeyMap.txt') as f:
     data = f.read()
 print("data type before process: ", type(data))
 d = ast.literal_eval(data)
