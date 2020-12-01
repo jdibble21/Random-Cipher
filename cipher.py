@@ -10,12 +10,17 @@ def main():
     print("=== Welcome to python cipher v0.1.0 ===")
     userInput = ""
     while(True):
-        userInput = input("Choose a option\n0 Specify an existing cipher key mapping to use\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n4 Help and Instructions\n\n")
+        userInput = input("Choose a option (or q to exit):\n0 Specify an existing cipher key mapping to use\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n4 Help and Instructions\n\n")
         if userInput == "q":
             break
+        if userInput == "0":
+            filename = input("Enter filename (.txt) to use an existing key mapping\n")
+            setKeyMapper(filename)
         if userInput == "1":
             userInput = input("Enter a filename (.txt) for the generated key to save to,\ninclude filepath info if applicable\n\n")
             generateKey(userInput)
+        
+         
 
 
 def generateKey(newFile):
