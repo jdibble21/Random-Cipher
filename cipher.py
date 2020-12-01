@@ -1,6 +1,6 @@
 #/usr/bin/python3
 from random import randrange
-import sys, getopt
+import time
 import ast
 
 keyMapperFile = ""
@@ -20,6 +20,8 @@ def main():
 
 def generateKey(newFile):
     #associate letters of alphabet with a random character and save mapped characters to text file
+    print("Generating new key mapping...")
+    time.sleep(1.5)
     charsToTranslate = ["a","b","c","d", "e", "f" , "g", "h","i","j","k","l","m","n","o","p","q","r","s","t","u",
     "v","w","x","y","z"," "]
     charsToChoose = ["a", "b", "c" , "d", "A" , "B" , "C" , "E", "Z", "x" , "O","o", "1", "!", "2", "@", "3", "#", 
@@ -32,10 +34,13 @@ def generateKey(newFile):
         currentTranslate = charsToChoose[chosenIndex]
         charsToChoose.pop(chosenIndex)
         keyMap[currentChar] = currentTranslate
-
+    print("Saving key map to " + newFile+"...")
+    time.sleep(1)
     saveFile = open(newFile,"w")
     saveFile.write(str(keyMap))
     saveFile.close()
+    print("Done\n")
+    time.sleep(2)
 
 
 def encrypt(toTranslate):
@@ -70,7 +75,7 @@ def setKeyMapper(filename):
     global keyMapperFile
     keyMapperFile = filename
 
-
+main()
 '''
 with open('exampleKeyMap.txt') as f:
     data = f.read()
