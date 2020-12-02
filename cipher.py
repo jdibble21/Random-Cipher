@@ -3,7 +3,7 @@ from random import randrange
 import time
 import ast
 
-keyMapperFile = ""
+keyMapperFile = "exampleKeyMap.txt"
 
 
 def main():
@@ -17,10 +17,11 @@ def main():
             filename = input("Enter filename (.txt) to use an existing key mapping\n")
             setKeyMapper(filename)
         if userInput == "1":
-            userInput = input("Enter a filename (.txt) for the generated key to save to,\ninclude filepath info if applicable\n\n")
+            userInput = input("Enter a filename for the generated key to save to,\ninclude filepath info if applicable\n\n")
             generateKey(userInput)
-        
-         
+        if userInput == "2":
+            userInput = input("Enter some text to encrypt: \n\n")
+            encrypt(userInput)
 
 
 def generateKey(newFile):
@@ -39,9 +40,9 @@ def generateKey(newFile):
         currentTranslate = charsToChoose[chosenIndex]
         charsToChoose.pop(chosenIndex)
         keyMap[currentChar] = currentTranslate
-    print("Saving key map to " + newFile+"...")
+    print("Saving key map to " + newFile+".txt...")
     time.sleep(1)
-    saveFile = open(newFile,"w")
+    saveFile = open(newFile+".txt","w")
     saveFile.write(str(keyMap))
     saveFile.close()
     print("Done\n")
@@ -50,18 +51,24 @@ def generateKey(newFile):
 
 def encrypt(toTranslate):
     #replace real string values with associated key values
-    key = open(r"cipherKey/keyMap.txt","r")  #!!!!
+    global keyMapperFile
+    print("Getting key map from " + keyMapperFile+"...")
+    time.sleep(0.8)
+    with open(keyMapperFile) as f:
+        data = f.read()
+    keyDict = ast.literal_eval(data)
     encryptedString = ""
+    currentEncryptChar = ""
+    print("Encrypting...")
+    time.sleep(1.2)
     for i in range(0,len(toTranslate)):
-        currentLetter = toTranslate[i]
-        currentLine = str(key.readlines())
-        encryptedLetter = currentLine[1]
-        encryptedString = encryptedString + encryptedLetter
-
-    print("Encrypted string: " + encryptedString)
-    key.close()
-    return encryptedString
-
+        currentEncryptChar = keyDict[toTranslate[i]]
+        encryptedString = encryptedString + currentEncryptChar
+    print("Done")
+    time.sleep(0.5)
+    print("Encrypted string is below\n")    
+    print(encryptedString+"\n\n")
+    time.sleep(2)
 
 def decrypt(toDecrypt,keyMap):
     key = open(r"cipherKey/keyMap.txt", "r")
@@ -81,10 +88,3 @@ def setKeyMapper(filename):
     keyMapperFile = filename
 
 main()
-'''
-with open('exampleKeyMap.txt') as f:
-    data = f.read()
-print("data type before process: ", type(data))
-d = ast.literal_eval(data)
-print("data type after: ", type(d))
-'''
