@@ -10,7 +10,8 @@ def main():
     print("=== Welcome to python cipher v0.1.0 ===")
     userInput = ""
     while(True):
-        userInput = input("Choose a option (or q to exit):\n0 Specify an existing cipher key mapping to use\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n4 Help and Instructions\n\n")
+        print("\nCurrent encrypt/decrypt key mapper is: " + keyMapperFile)
+        userInput = input("\nChoose a option (or q to exit):\n0 Specify an existing cipher key mapping to use\n1 Generate a cipher key\n2 Encrypt some input or text file \n3 Decrypt some input or a text file\n4 Help and Instructions\n\n")
         if userInput == "q":
             break
         if userInput == "0":
